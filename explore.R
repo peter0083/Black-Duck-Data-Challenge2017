@@ -5,9 +5,10 @@ library(cluster)
 data <- read_feather("results/data.feather")
 head(data)
 pjt_by_lic <- data %>% 
-  group_by(license_id) %>% 
+  group_by(d_r_uuid) %>% 
   summarise(count = n()) %>% 
-  arrange(desc(count))
+  arrange(desc(count)) %>% 
+  View()
 
 pjt_by_dns <- data %>% 
   group_by(dns) %>% 
@@ -53,14 +54,14 @@ data_small <- data_counts[1:500, 3:6]
 # plot(data_small$so_c,data_small$license_id_c)
 
 
-cov_matrix <- cov(data_small)
-eigen_vectors <- eigen(cov_matrix)$vectors
-eigen_values <- eigen(cov_matrix)$values
-eigen_values[1]/sum(eigen_values)
-
-y <- data.frame(pc1=as.matrix(data_small) %*% eigen_vectors[,1], pc2=as.matrix(data_small) %*% eigen_vectors[,2])
-
-ggplot(y, aes(x=pc1,y=pc2)) + geom_jitter()
+# cov_matrix <- cov(data_small)
+# eigen_vectors <- eigen(cov_matrix)$vectors
+# eigen_values <- eigen(cov_matrix)$values
+# eigen_values[1]/sum(eigen_values)
+# 
+# y <- data.frame(pc1=as.matrix(data_small) %*% eigen_vectors[,1], pc2=as.matrix(data_small) %*% eigen_vectors[,2])
+# 
+# ggplot(y, aes(x=pc1,y=pc2)) + geom_jitter()
 
 # center the data
 
@@ -80,7 +81,7 @@ fact_analysis$loadings
 
 # Plotting dws_c vs license_id_c
 
-ggplot(as.data.frame(data_small), aes(x=license_id_c,y=dws_c)) + geom_jitter() + ylim(1,10)
+ggplot(as.data.frame(data_small), aes(x=license_id_c,y=dws_c)) + geom_jitter(alpha = .1,size = 2) + ylim(1,10)
 
 # Plotting dns_c vs license_id_c
 

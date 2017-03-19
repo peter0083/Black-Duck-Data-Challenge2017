@@ -1,6 +1,14 @@
 library(feather)
 library(tidyverse)
 data <- read_feather("results/data.feather")
+
+pjts <- data %>% 
+  group_by(d_r_uuid,version,license_id) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(version))
+
+version_dists <- unlist(lapply(1:nrow(pjts)-1, function(i) agrepl(pjts$version[i], pjts$version[i+1])))
+
 pjt_by_lic <- data %>% 
   group_by(license_id) %>% 
   summarise(count = n()) %>% 

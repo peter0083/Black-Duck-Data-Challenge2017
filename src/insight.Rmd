@@ -1,5 +1,5 @@
 ---
-title: "insight"
+title: "5 insights"
 output: github_document
 ---
 
@@ -9,13 +9,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r load dependencies}
 library(feather)
-library(tidyverse)
+library(dplyr)
+
+data <- read_feather("../results/data.feather")
+head(data)
 ```
 
 
-### Most popular projects by license ID
+### 1. Most popular projects by license ID
 
-```{rMost popular projects by uuid, version and license ID}
+```{r Most popular projects by uuid version and license ID}
 top_projects <- data %>% 
   group_by(d_r_uuid, version, license_id) %>% 
   summarize(count= n()) %>% 
@@ -26,7 +29,7 @@ head(top_projects)
 Open source project ID 3dec9166-bd9d-45d3-acae-9c78adb1a684, version 2.15.2 with license ID 45 is the most popular. It has 7393 observations.
 
 
-### Most popular projects by uuid and version only
+### 2. Most popular projects by uuid and version only
 
 ```{r Most popular projects by uuid and version only}
 top_projects2 <- data %>% 
@@ -39,7 +42,7 @@ head(top_projects2)
 Open source project ID 2ff38a7c-238b-487f-af9b-64a2ec81d81c, verison 8u72-b15 (regardless of license types) is the most popular, It has 46680 observations.
 
 
-### Most common license ID used in this collection of open source projects
+### 4. Most common license ID used in this collection of open source projects
 
 ```{r Most common license ID used}
 top_license <- data %>% 
@@ -52,7 +55,7 @@ head(top_license)
 License ID 45 is the most commonly used license in this collection of open source projects. It has 439800 observations.
 
 
-### Most popular project by uuid only
+### 3. Most popular project by uuid only
 
 ```{r Most popular project by uuid only}
 top_project3 <- data %>% 
@@ -65,7 +68,7 @@ head(top_project3)
 Open source project ID 2ff38a7c-238b-487f-af9b-64a2ec81d81c (regardless of verison and license ID) is the most popular, It has 46680 observations. It is the same project when sorted by uuid and version.
 
 
-### Number of unpopular projects
+### 5. Number of unpopular projects
 
 ```{r unpopular projects}
 unpopular_project <- data %>% 

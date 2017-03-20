@@ -4,9 +4,13 @@ Black Duck Data Challenge @ UBC
 
 team member: Peter and Sheena
 
-Please find the 'insight.Rmd' in 'src' directory.
+Please find the `insight.md` in `doc` directory.
 
-Outline:
+Data and and results directories
+- raw data set and `data.feather` generated from the raw data set exceed the file size limit (100 mb) of github.com free account so these two files are removed from the repo.
+
+
+Challenge Outline:
 - find something useful/insights out of this data set
 - ie. first column is uuid. each row is a open source project. 
 - each project has three features, a version and a license associated with each projects 
@@ -18,6 +22,6 @@ Outline:
 - 3 million rowsss
 
 Acknowledgement:
-- Thanks to Kai, Hatice and Prash's help with my submission.
+- Thanks to Kai, Hatice and Prash's help with the submission. Kai helped me a lot with the codes and concepts.
 - we did brainstorming sessions and discussion together. :smile:
 - link to their repo https://github.com/ananab/bduck

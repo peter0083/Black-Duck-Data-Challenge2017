@@ -1,4 +1,7 @@
+
+
 ```{r}
+
 library(feather)
 library(tidyverse)
 library(mclust)
@@ -25,7 +28,6 @@ head(top_lic,10)
 
 ```{r}
 
-
 (top_uuid <- data %>% 
   group_by(d_r_uuid) %>% 
   summarise(num = n()) %>% 
@@ -42,9 +44,66 @@ data %>%
   filter(d_r_uuid %in% top_uuid$d_r_uuid) %>% 
   group_by(d_r_uuid,version) %>% 
   summarise(num = n()) %>% 
-  View()
+  arrange(desc(num))
+
   
 ```
 
 ## Insight: Each d_r_uuid (open source project id) is associated with a unique version of a project. In other words, different versions of the same project will have different open source project ids.
+
+combine levels based on their occurring frequency in the dataset.
+
+```{r}
+data$license_id <- as.factor(data$license_id)
+
+dws_freq <- as.data.frame(table(data$dws))
+names(dws_freq) <- c("dws","dwsfreq")
+
+dns_freq <- as.data.frame(table(data$dns))
+names(dns_freq) <- c("dns","dnsfreq")
+
+so_freq <- as.data.frame(table(data$so))
+names(so_freq) <- c("so","sofreq")
+
+lic_freq <- as.data.frame(table(data$license_id))
+names(lic_freq) <- c("license_id","licfreq")
+
+combined <- inner_join(dws_freq,data,by="dws")
+combined <- inner_join(dns_freq,combined,by = "dns")
+combined <- inner_join(so_freq,combined,by = "so")
+combined <- inner_join(lic_freq,combined,by = "license_id")
+
+data_freq <- combined %>% 
+  select(d_r_uuid, version, dwsfreq, dnsfreq, sofreq, licfreq)
+```
+
+
+```{r}
+combined %>% 
+  arrange(desc(dwsfreq)) %>% 
+  head(10)
+
+combined %>% 
+  arrange(desc(dnsfreq)) %>% 
+  head(10)
+
+combined %>% 
+  arrange(desc(sofreq)) %>% 
+  head(10)
+
+combined %>% 
+  arrange(desc(licfreq)) %>% 
+  head(10)
+
+```
+
+```{r}
+combined %>% 
+  group_by(so,dns) %>% 
+  summarise(num = n()) %>% 
+  arrange(desc(num)) %>% 
+  View()
+```
+
+
 

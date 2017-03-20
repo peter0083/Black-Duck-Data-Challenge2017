@@ -10,7 +10,7 @@ pjts <- data %>%
   summarise(count = n()) %>% 
   arrange(desc(version))
 
-version_dists <- unlist(lapply(1:nrow(pjts)-1, function(i) agrepl(pjts$version[i], pjts$version[i+1])))
+# version_dists <- unlist(lapply(1:nrow(pjts)-1, function(i) agrepl(pjts$version[i], pjts$version[i+1])))
 
 head(data)
 pjt_by_lic <- data %>% 
@@ -119,16 +119,17 @@ prj <- data %>%
   summarise(total_num=n()) %>% 
   arrange(desc(total_num))
 
-short_list <- as.vector(prj[prj$total_num>12740,]$d_r_uuid)
+# short_list <- as.vector(prj[prj$total_num>12740,]$d_r_uuid)
 
+short_list <- prj$d_r_uuid[1:5]
 
 short_data <- data %>% 
   filter(d_r_uuid %in% short_list)
 
-
-
 # trial with 16 projects
-distance_matrix <- matrix(rep(0,256), nrow=16, ncol=16)
+# distance_matrix <- matrix(rep(0,256), nrow=16, ncol=16)
+
+distance_matrix <- matrix(nrow = nrow(short_data),ncol = nrow(short_data))
 
 for(i in 1:16){
   selected_data_left <- short_data %>% 

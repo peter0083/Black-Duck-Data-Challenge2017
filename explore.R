@@ -4,8 +4,8 @@ library(mclust)
 library(cluster)
 data <- read_feather("results/data.feather")
 head(data)
-pjt_by_lic <- data %>% 
-  group_by(d_r_uuid) %>% 
+pjts <- data %>% 
+  group_by(d_r_uuid,version,license_id) %>% 
   summarise(count = n()) %>% 
   arrange(desc(count)) %>% 
   View()

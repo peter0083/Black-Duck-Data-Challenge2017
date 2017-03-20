@@ -19,7 +19,7 @@ Challenge Outline:
 - any 5 insights will get 50$ amazon gift card
 - winner(s): interviews + lunch at office + office tour
 - minimum two people per team
-- 3 million rowsss
+- 3 million rowsss :sweat:
 
 Acknowledgement:
 - Thanks to Kai, Hatice and Prash's help with the submission. Kai helped me a lot with the codes and concepts.

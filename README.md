@@ -24,4 +24,4 @@ Challenge Outline:
 Acknowledgement:
 - Thanks to Kai, Hatice and Prash's help with the submission. Kai helped me a lot with the codes and concepts.
 - we did brainstorming sessions and discussion together. :smile:
-- link to their repo https://github.com/ananab/bduck <---- Kai/Hatice won one of the two top prizes of this competition! ::smiley::
+- link to their repo https://github.com/ananab/bduck <---- Kai/Hatice won one of the two top prizes of this competition! :celebrate:
